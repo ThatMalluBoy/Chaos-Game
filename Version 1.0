@@ -1,0 +1,54 @@
+import random
+
+#This will define one length of the triangle
+side = int(input('What would you like the side length of the triangle to be? '))
+
+#This will define the other lengths by useing Pythagorean's theorem
+height = (3 ** 0.5) * side / 2
+
+
+#Defining the first point (at the origin)
+x1 = 0
+y1 = 0
+
+#Defining the second point (right end of the triangle)
+x2 = side
+y2 = 0
+
+#Defining the third point (at the top of the triangle)
+x3 = side/2
+y3 = height
+
+#Storing these points in a list
+points = [(x1, y1), (x2, y2), (x3, y3)]
+
+# Generate three random weights that add up to 1
+w1 = random.random()
+w2 = random.random() * (1 - w1)
+w3 = 1 - w1 - w2
+
+# Calculate the coordinates of the random point using a weighted average of the corners
+x = w1 * x1 + w2 * x2 + w3 * x3
+y = w1 * y1 + w2 * y2 + w3 * y3
+
+# Mark the point as the current point
+current_point = (x, y)
+
+#Print the coordinates of the current point
+print(current_point)
+
+# Repeat steps 3 and 4 for 1000 times
+for i in range(1000):
+    # Choose a random corner from the list of points
+    corner = random.choice(points)
+
+    # Find the coordinates of the midpoint between the current point and the corner
+    mid_x = (current_point[0] + corner[0]) / 2
+    mid_y = (current_point[1] + corner[1]) / 2
+
+    # Mark the midpoint as the new current point
+    current_point = (mid_x, mid_y)
+
+    # Print the coordinates of the current point
+    print(current_point)
+
